@@ -1,0 +1,112 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.parcelize'
+    id 'com.chaquo.python'
+}
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 23
+        targetSdk 33
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+
+        sourceSets {
+            main {
+                python {
+                    srcDirs = ["src/main/python"]
+                }
+            }
+        }
+        python {
+            buildPython "/opt/homebrew/Caskroom/miniforge/base/envs/mlp/bin/python"
+            buildPython "python3"
+
+            pip {
+                install "numpy"
+                install "scipy"
+                install "pandas"
+                install "resampy==0.3.1"
+                install "samplerate"
+            }
+        }
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
+    namespace 'ru.kpfu.health'
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.1'
+
+    //RxJava2
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    // Moxy
+//    implementation "com.github.moxy-community.Moxy:moxy-androidx:2.1.2"
+//    implementation "com.github.moxy-community.Moxy:moxy-ktx:2.1.2"
+//    implementation "com.github.moxy-community.Moxy:moxy-material:2.1.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
+
+    //Koin
+    //https://github.com/InsertKoinIO/koin
+    implementation "io.insert-koin:koin-core:3.1.5"
+    implementation "io.insert-koin:koin-android:3.2.0"
+    implementation "io.insert-koin:koin-android-compat:3.2.0"
+
+    implementation 'org.tensorflow:tensorflow-android:1.13.1'
+    implementation 'org.tensorflow:tensorflow-lite-task-audio:0.2.0'
+    implementation 'org.tensorflow:tensorflow-lite:2.4.0'
+
+    //Camera
+    implementation 'androidx.camera:camera-camera2:1.2.0'
+    implementation 'androidx.camera:camera-view:1.2.0'
+    implementation 'androidx.camera:camera-extensions:1.2.0'
+    implementation 'androidx.camera:camera-lifecycle:1.2.0'
+
+    implementation 'com.google.code.gson:gson:2.9.0'
+
+    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+
+
+    implementation 'org.nield:kotlin-statistics:1.2.1'
+
+    implementation 'org.jcodec:jcodec:0.2.5'
+    implementation 'org.jcodec:jcodec-android:0.2.5'
+    implementation("com.google.guava:guava:31.1-android")
+    implementation 'com.google.mlkit:face-detection:16.1.5'
+}

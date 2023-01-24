@@ -1,0 +1,11 @@
+<resources>
+    <string name="fine_motor_defect_desc">Держите телефон вертикально перед собой. Изерение начнется через 3с </string>
+    <string name="fine_motor_defect_started">Процедура измерения началась</string>
+    <string name="fine_motor_defect_finished">Процедура измерения закончена</string>
+    <string name="fine_motor_defect_defected">Обнаружен</string>
+    <string name="fine_motor_defect_not_detected">Не обнаружен</string>
+    <string name="head_tremor_prepare_start">Поместиту голову в рамку, измерения начнутся через 5 с</string>
+    <string name="head_tremor_measure_start">Измерение началось</string>
+    <string name="head_tremor_measure_finished">Измерение завершено</string>
+
+</resources>
